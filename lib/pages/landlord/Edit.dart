@@ -9,7 +9,7 @@ import 'property_models.dart';
 class EditPropertyPage extends StatefulWidget {
   final Property property;
 
-  const EditPropertyPage({Key? key, required this.property}) : super(key: key);
+  const EditPropertyPage({super.key, required this.property});
 
   @override
   _EditPropertyPageState createState() => _EditPropertyPageState();
@@ -486,11 +486,11 @@ class _EditPropertyPageState extends State<EditPropertyPage> {
               // Save Button
               ElevatedButton(
                 onPressed: _saveProperty,
-                child: const Text("Save Property"),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   textStyle: const TextStyle(fontSize: 18),
                 ),
+                child: const Text("Save Property"),
               ),
             ],
           ),
