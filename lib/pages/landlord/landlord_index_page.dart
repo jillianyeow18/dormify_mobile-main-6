@@ -198,7 +198,7 @@ class _LandlordIndexPageState extends State<LandlordIndexPage> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: const [
-                                            Icon(Icons.add, size: 20),
+                                            Icon(Icons.add, size: 20, color: Colors.white,),
                                             SizedBox(width: 4),
                                             Text(
                                               'Add New Property',

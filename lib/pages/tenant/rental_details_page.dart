@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:dormify_mobile/pages/Landlord/property_models.dart';
@@ -5,7 +6,6 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class RentalDetailPage extends StatefulWidget {
   final Property property;
-
   const RentalDetailPage({super.key, required this.property});
 
   @override
@@ -22,11 +22,29 @@ class _RentalDetailPageState extends State<RentalDetailPage> {
     _pageController = PageController();
   }
 
+Future<String> fetchContact(String landlordId) async {
+  try {
+    DocumentSnapshot landlordDoc = await FirebaseFirestore.instance
+        .collection('landlord')
+        .doc(widget.property.landlordID)
+        .get();
+
+    if (landlordDoc.exists) {
+      String? phoneNumber = landlordDoc['phone number'];
+      return phoneNumber ?? 'N/A'; 
+    } else {
+      return 'N/A'; 
+    }
+  } catch (e) {
+    print('Error fetching phone number: $e');
+    return 'N/A'; 
+  }
+}
   @override
   Widget build(BuildContext context) {
     final property = widget.property;
     property.images.map((image) => image).toList();
-
+    
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -231,14 +249,28 @@ class _RentalDetailPageState extends State<RentalDetailPage> {
                             value: '${property.propertyType}',
                           );
                         case 3:
-                          return DetailCard(
-                            icon: Icons.phone,
-                            title: 'Contact',
-                            value: 'N/A', // Update as needed
-                          );
-                        default:
-                          return const SizedBox.shrink();
+                        return FutureBuilder<String>(
+                          future: property.landlordID != null ? fetchContact(property.landlordID!) : Future.value('N/A'), // Check if landlordID is not null
+                          builder: (context, snapshot) {
+                            if (snapshot.hasError) {
+                              // Handle errors
+                              return DetailCard(
+                                icon: Icons.phone,
+                                title: 'Contact',
+                                value: 'Error', // Show error message
+                              );
+                            } else {
+                              // Show the fetched phone number
+                              return DetailCard(
+                                icon: Icons.phone,
+                                title: 'Contact',
+                                value: snapshot.data ?? 'N/A', // Fallback to 'N/A' if data is null
+                              );
+                            }
+                          },
+                        );
                       }
+                      return null;
                     },
                   ),
                   const SizedBox(height: 20),

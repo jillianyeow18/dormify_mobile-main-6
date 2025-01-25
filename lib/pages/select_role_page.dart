@@ -42,14 +42,14 @@ class _SelectRolePageState extends State<SelectRolePage> {
 
     if (role == 'Tenant' && selectedUniversity != null) {
       final tenantDoc =
-          await FirebaseFirestore.instance.collection('tenant').doc(user.uid);
+          FirebaseFirestore.instance.collection('tenant').doc(user.uid);
 
       userData['university'] = selectedUniversity;
       userData['room type'] = selectedRoomType;
       tenantDoc.set(userData);
     } else {
       final landlordDoc =
-          await FirebaseFirestore.instance.collection('landlord').doc(user.uid);
+          FirebaseFirestore.instance.collection('landlord').doc(user.uid);
       landlordDoc.set(userData);
     }
 

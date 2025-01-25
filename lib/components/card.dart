@@ -258,8 +258,7 @@ class _PropertyCardState extends State<PropertyCard> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Icon(
-                                facilityIcons[facility] ??
-                                    Icons.help, // Assign icon or fallback
+                                facilityIcons[facility] , // Assign icon or fallback
                                 color: const Color.fromARGB(255, 0, 1, 1),
                               ),
                               const SizedBox(

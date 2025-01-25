@@ -146,7 +146,7 @@ class _LandlordPageState extends State<LandlordPage> {
                           return Text(
                             'Welcome back, ${snapshot.data}',
                             style: TextStyle(
-                                color: const Color.fromARGB(255, 5, 0, 0),
+                                color: Colors.white,
                                 fontSize: 19),
                           );
                         },

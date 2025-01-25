@@ -129,7 +129,6 @@ class _RentalIndexPageState extends State<RentalIndexPage> {
                   itemCount: filteredProperties.length,
                   itemBuilder: (context, index) {
                     final property = filteredProperties[index];
-                    property.selectedFacilities.add('Contact Us');
 
                     return FutureBuilder<bool>(
                       future: wishlistRepository.isPropertyInWishlist(

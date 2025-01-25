@@ -1,9 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dormify_mobile/pages/landlord/landlord_index_page.dart';
 import 'package:dormify_mobile/pages/landlord/landlord_page.dart';
-import 'package:dormify_mobile/pages/select_role_page.dart';
 import 'package:dormify_mobile/pages/tenant/rental_page.dart';
-import 'package:dormify_mobile/pages/tenant/tenant_home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -127,9 +124,9 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffE5F3FD),
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: const Color(0xffD1E5F4),
+        backgroundColor: Colors.white,
         title: const Text('Edit Profile'),
       ),
       body: Padding(
